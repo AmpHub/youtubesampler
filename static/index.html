@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <style>
+    .mainbox {
+      width: 500px;
+      margin: auto;
+      margin-top: 250px;
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .inputbox {
+      width: 75%;
+      margin: auto;
+      /* border: 1px solid black; */
+      padding: 10px;
+    }
+
+    .urlInput {
+      width: 250px;
+    }
+
+    .title {
+      width: 100%;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 800;
+    }
+  </style>
+
+
+  <body>
+    <div class="mainbox">
+      <span class="title">Youtube Sampler</span>
+      <hr />
+      <br />
+      <div class="inputbox">
+        <input class="urlInput" type="text" id="url" />
+        <button id="download">Download</button>
+      </div>
+    </div>
+  </body>
+
+
+  <script>
+    const urlInput = document.querySelector("#url");
+    const downloadBtn = document.querySelector("#download");
+
+    downloadBtn.addEventListener(
+      "click",
+      function (e) {
+        axios({
+          url: "/download", //your url
+          method: "POST",
+          responseType: "blob", // important
+          data: {
+            url: urlInput.value
+          }
+        }).then((response) => {
+          const contentHeader = response.headers['content-disposition'];
+          const filenameDirty = contentHeader.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
+          const filename = filenameDirty.substring(1, filenameDirty.length - 1)
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", filename); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+        });
+      },
+      false
+    );
+  </script>
+</html>
