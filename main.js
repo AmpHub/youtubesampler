@@ -4,7 +4,7 @@ const express = require('express')
 const ffmpeg = require('fluent-ffmpeg')
 const bodyParse = require('body-parser')
 const app = express()
-const port = 3000
+const port = 80
 
 app.use(bodyParse.json())
 
@@ -24,6 +24,7 @@ app.post('/download', (req, res) => {
     res.attachment(`${title} - ${videoid}.mp3`);
   
     ffmpeg(video)
+      .inputFormat('mp4')
       .format('mp3')
       .output(res)
       .on('end', function() {
