@@ -8,17 +8,12 @@ const port = 80
 
 app.use(bodyParse.json())
 
-app.post('/download', (req, res) => {
+app.get('/download/:id', (req, res) => {
 
   let videoid
-
-  if (req.body.url.length === 11) {
-    videoid = req.body.url
-  } else {
-    videoid = req.body.url.match(/watch\?v=.{1,11}/)[0].substring(8)
-  }
+  
   // const video = youtubedl(videoid)
-  const video = youtubedl(req.body.url)
+  const video = youtubedl(req.params.id)
   
   // Will be called when the download starts.
   video.on('info', (info) => {
@@ -28,9 +23,9 @@ app.post('/download', (req, res) => {
 
     // console.log(info)
 
-    const title = info._filename.substring(0, 20)
+    const title = info._filename.substring(0, 40)
 
-    res.attachment(`${title} - ${videoid}.mp3`);
+    res.attachment(`${title}.mp3`);
   
     ffmpeg(video)
       .inputFormat('mp4')
@@ -38,6 +33,7 @@ app.post('/download', (req, res) => {
       .output(res)
       .on('end', function() {
         console.log('Finished processing');
+        res.status(200).send()
       })
       .run();
   })
@@ -52,12 +48,15 @@ app.post('/info', (req, res) => {
       res.status(500).json({error: 'Error retrieving info'})
     }
 
-    const {title, thumbnail} = info;
-  
-    console.log('title:', title)
-    console.log('thumbnail:', thumbnail)
 
-    res.status(200).json({title, thumbnail})
+    console.log(info)
+
+    const {title, thumbnail, id} = info;
+  
+    // console.log('title:', title)
+    // console.log('thumbnail:', thumbnail)
+
+    res.status(200).json({title, thumbnail, id})
   })
 })
 

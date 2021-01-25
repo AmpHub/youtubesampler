@@ -98,25 +98,6 @@
       "click",
       function (e) {
         axios({
-          url: "/download", //your url
-          method: "POST",
-          responseType: "blob", // important
-          data: {
-            url: urlInput.value
-          }
-        }).then((response) => {
-          const contentHeader = response.headers['content-disposition'];
-          const filenameDirty = contentHeader.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
-          const filename = filenameDirty.substring(1, filenameDirty.length - 1)
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", filename); //or any other extension
-          document.body.appendChild(link);
-          link.click();
-        });
-
-        axios({
           url: "/info", //your url
           method: "POST",
           responseType: "json", // important
@@ -126,10 +107,16 @@
         }).then((response) => {
           const vidThumbEl = document.querySelector('#vidThumb')
           const vidTitleEl = document.querySelector('#vidTitle')
-          const {title, thumbnail} = response.data
+          const {title, thumbnail, id} = response.data
 
           vidThumbEl.setAttribute('src', thumbnail);
           vidTitleEl.innerHTML = title;
+
+          const link = document.createElement("a");
+          link.href = `/download/${id}`;
+          link.setAttribute("download", title + '.mp3'); //or any other extension
+          document.body.appendChild(link);
+          link.click();
         })
       },
       false
