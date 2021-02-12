@@ -17,9 +17,9 @@ app.get('/download/:id', (req, res) => {
   
   // Will be called when the download starts.
   video.on('info', (info) => {
-    console.log('Download started')
-    console.log('filename: ' + info._filename)
-    console.log('size: ' + info.size)
+    // console.log('Download started')
+    // console.log('filename: ' + info._filename)
+    // console.log('size: ' + info.size)
 
     // console.log(info)
 
@@ -32,7 +32,7 @@ app.get('/download/:id', (req, res) => {
       .format('mp3')
       .output(res)
       .on('end', function() {
-        console.log('Finished processing');
+        // console.log('Finished processing');
         res.status(200).send()
       })
       .run();
@@ -49,7 +49,7 @@ app.post('/info', (req, res) => {
     }
 
 
-    console.log(info)
+    // console.log(info)
 
     const {title, thumbnail, id} = info;
   
