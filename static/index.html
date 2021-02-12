@@ -5,19 +5,22 @@
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
       crossorigin="anonymous"
     ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
   </head>
 
   <style>
     body {
-      font-family:Arial, Helvetica, sans-serif;
+      overflow: hidden;
     }
 
     .mainbox {
-      width: 500px;
+      width: 750px;
       margin: auto;
-      margin-top: 250px;
-      border: 1px solid black;
-      padding: 10px;
+      margin-top: 150px;
+      /* border: 1px solid black; */
+      padding: 20px;
     }
 
     .inputbox {
@@ -28,14 +31,14 @@
     }
 
     .urlInput {
-      width: 80%;
+      width: 75%;
+      font-size: 12px;
     }
 
     .title {
-      font-size: 8px;
       width: 100%;
       text-align: center;
-      font-size: 36px;
+      font-size: 24px;
       font-weight: 800;
     }
 
@@ -67,20 +70,23 @@
 
 
   <body>
-    <div class="mainbox">
-      <span class="title">Sample Youtube</span>
-      <hr />
-      <div class="videoinfo">
-        <div id="vidThumbWrapper">
-          <img id="vidThumb">
+    <div class="mainbox ">
+      <div class="nes-container is-rounded">
+        <span class="title nes-text">Sample Youtube</span>
+        <hr />
+        <div class="videoinfo">
+          <div id="vidThumbWrapper">
+            <img id="vidThumb">
+          </div>
+          <br>
+          <div id="vidTitle"></div>
         </div>
-        <br>
-        <div id="vidTitle"></div>
-      </div>
-      <br />
-      <div class="inputbox">
-        <input placeholder="ex: https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="urlInput" type="text" id="url" />
-        <button id="download">Download</button>
+        <br />
+  
+        <div class="inputbox nes-field is-inline">
+          <input placeholder="ex: www.youtube.com/watch?v=dQw4w9WgXcQ" class="urlInput nes-input" type="text" id="url" />
+          <button id="download" class="nes-btn">Download</button>
+        </div>
       </div>
     </div>
 
