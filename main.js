@@ -8,6 +8,8 @@ const port = 80
 
 app.use(bodyParse.json())
 
+
+
 app.get('/download/:id', (req, res) => {
 
   let videoid
@@ -23,7 +25,7 @@ app.get('/download/:id', (req, res) => {
 
     // console.log(info)
 
-    const title = info._filename.substring(0, 40)
+    const title = info._filename.substring(0, 40).replace(/ /g, '')
 
     res.attachment(`${title}.mp3`);
   
@@ -40,6 +42,39 @@ app.get('/download/:id', (req, res) => {
   
 
 })
+
+// app.get('/downloadwav/:id', (req, res) => {
+
+//   let videoid
+  
+//   // const video = youtubedl(videoid)
+//   const video = youtubedl(req.params.id)
+  
+//   // Will be called when the download starts.
+//   video.on('info', (info) => {
+
+//     const title = info._filename.substring(0, 40).replace(/ /g, '')
+
+//     res.attachment(`${title}.aac`);
+    
+  
+//     ffmpeg(video)
+//       .inputFormat('mp4')
+//       .outputOptions(['-c:a aac', '-b:a 128k'])
+//       .format('aac')
+//       .output(res)
+//       .on('end', ()=> {
+//         // console.log('Finished processing');
+//         res.status(200).send()
+//       })
+//       .on('error', err => {
+//         console.log(err)
+//       })
+//       .run();
+//   })
+  
+
+// })
 
 app.post('/info', (req, res) => {
   youtubedl.getInfo(req.body.url, function(err, info) {

@@ -16,9 +16,19 @@
     }
 
     .mainbox {
-      width: 750px;
-      margin: auto;
-      margin-top: 150px;
+      width: 800px;
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      
+
+
+      /* 
+      Yep!
+      */
+      transform: translate(-50%, -30%);
+      /* margin: auto;
+      margin-top: 150px; */
       /* border: 1px solid black; */
       padding: 20px;
     }
@@ -86,7 +96,14 @@
   
         <div class="inputbox nes-field is-inline">
           <input placeholder="ex: www.youtube.com/watch?v=dQw4w9WgXcQ" class="urlInput nes-input" type="text" id="url" />
-          <button id="download" class="nes-btn">Download MP3</button>
+          <!-- <div style="width: 25px"></div> -->
+          <!-- <div class="nes-container with-title is-centered">
+            <p class="title">Download</p>
+            <button id="download" class="nes-btn">.mp3</button>
+            <button id="downloadwav" class="nes-btn">.aac</button>
+          </div> -->
+            <button id="download" class="nes-btn">Download .MP3</button>
+          </div>
         </div>
       </div>
     </div>
@@ -103,6 +120,7 @@
   <script>
     const urlInput = document.querySelector("#url");
     const downloadBtn = document.querySelector("#download");
+    // const downloadWavBtn = document.querySelector("#downloadwav");
 
     downloadBtn.addEventListener(
       "click",
@@ -131,5 +149,33 @@
       },
       false
     );
+
+    // downloadWavBtn.addEventListener(
+    //   "click",
+    //   function (e) {
+    //     axios({
+    //       url: "/info", //your url
+    //       method: "POST",
+    //       responseType: "json", // important
+    //       data: {
+    //         url: urlInput.value
+    //       }
+    //     }).then((response) => {
+    //       const vidThumbEl = document.querySelector('#vidThumb')
+    //       const vidTitleEl = document.querySelector('#vidTitle')
+    //       const {title, thumbnail, id} = response.data
+
+    //       vidThumbEl.setAttribute('src', thumbnail);
+    //       vidTitleEl.innerHTML = title;
+
+    //       const link = document.createElement("a");
+    //       link.href = `/downloadwav/${id}`;
+    //       link.setAttribute("download", title + '.aac'); //or any other extension
+    //       document.body.appendChild(link);
+    //       link.click();
+    //     })
+    //   },
+    //   false
+    // );
   </script>
 </html>
