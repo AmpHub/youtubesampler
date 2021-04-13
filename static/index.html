@@ -1,92 +1,101 @@
 <html>
   <head>
+    <title>Sample Youtube</title>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
       crossorigin="anonymous"
     ></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+    
+    <style>
+      body {
+        overflow: hidden;
+      }
+
+      .mainbox {
+        width: 800px;
+        position: absolute;
+        left: 50%;
+        top: 30%;
+        
+
+
+        /* 
+        Yep!
+        */
+        transform: translate(-50%, -30%);
+        /* margin: auto;
+        margin-top: 150px; */
+        /* border: 1px solid black; */
+        padding: 20px;
+      }
+
+
+      .inputbox {
+        width: 95%;
+        margin: auto;
+        /* border: 1px solid black; */
+        padding: 10px;
+      }
+
+      .urlInput {
+        width: 75%;
+        font-size: 10px;
+      }
+
+      .title {
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .credit {
+        position: fixed;
+        font-size: 8px;
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .donation {
+        position:fixed;
+        font-size: 8px;
+        bottom: 10px;
+        left: 10px;
+      }
+
+      #vidThumbWrapper {
+        width: 85%;
+        margin: auto;
+        /* max-height: 250px; */
+      }
+
+      #vidThumb {
+        width: 100%;
+        /* margin: auto; */
+        /* max-height: 250px; */
+      }
+
+      #vidTitle {
+        width: 100%;
+        text-align: center;
+        margin: auto;
+        font-size: 12px
+      }
+    </style>
   </head>
 
-  <style>
-    body {
-      overflow: hidden;
-    }
 
-    .mainbox {
-      width: 800px;
-      position: absolute;
-      left: 50%;
-      top: 30%;
-      
-
-
-      /* 
-      Yep!
-      */
-      transform: translate(-50%, -30%);
-      /* margin: auto;
-      margin-top: 150px; */
-      /* border: 1px solid black; */
-      padding: 20px;
-    }
-
-    .inputbox {
-      width: 95%;
-      margin: auto;
-      /* border: 1px solid black; */
-      padding: 10px;
-    }
-
-    .urlInput {
-      width: 75%;
-      font-size: 10px;
-    }
-
-    .title {
-      width: 100%;
-      text-align: center;
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .credit {
-      position: fixed;
-      font-size: 8px;
-      bottom: 10px;
-      right: 10px;
-    }
-
-    #vidThumbWrapper {
-      width: 85%;
-      margin: auto;
-      /* max-height: 250px; */
-    }
-
-    #vidThumb {
-      width: 100%;
-      /* margin: auto; */
-      /* max-height: 250px; */
-    }
-
-    #vidTitle {
-      width: 100%;
-      text-align: center;
-      margin: auto;
-      font-size: 12px
-    }
-  </style>
-
-
-  <body>
-    <div class="mainbox ">
-      <div class="nes-container is-rounded">
+<body>
+  <div class="mainbox ">
+    <div class="nes-container is-rounded">
         <span class="title nes-text">Sample Youtube</span>
         <hr />
         <div class="videoinfo">
-          <div id="vidThumbWrapper">
+          <div class="nes-container" id="vidThumbWrapper">
             <img id="vidThumb">
           </div>
           <br>
@@ -110,6 +119,18 @@
 
     <div class="credit">
       Made with ❤️ by <a href="https://www.github.com/matttt">Matthew Martori</a>
+    </div>
+
+    <div class="donation">
+      <form action="https://www.paypal.com/donate" method="post" target="_top">
+        <input type="hidden" name="business" value="VVHFLEN7R6AZG" />
+        <input type="hidden" name="item_name" value="Safe and reliable youtube downloading" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+        </form>       
+        <span>Help keep Sample Youtube ad-free</span>
+ 
     </div>
 
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
