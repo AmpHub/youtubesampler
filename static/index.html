@@ -21,7 +21,7 @@
         left: 50%;
         top: 30%;
         
-
+        /* ur doin great! */
 
         /* 
         Yep!
@@ -95,7 +95,7 @@
         <span class="title nes-text">Sample Youtube</span>
         <hr />
         <div class="videoinfo">
-          <div class="nes-container" id="vidThumbWrapper">
+          <div class="nes-container" id="vidThumbWrapper" style="display: none;">
             <img id="vidThumb">
           </div>
           <br>
@@ -117,18 +117,20 @@
       </div>
     </div>
 
-    <div class="credit">
+    <!-- <div class="credit">
       Made with ❤️ by <a href="https://www.github.com/matttt">Matthew Martori</a>
-    </div>
+    </div> -->
 
     <div class="donation">
       <form action="https://www.paypal.com/donate" method="post" target="_top">
-        <input type="hidden" name="business" value="VVHFLEN7R6AZG" />
-        <input type="hidden" name="item_name" value="Safe and reliable youtube downloading" />
+        <input type="hidden" name="business" value="KE9WYCPPJJT8Y" />
+        <input type="hidden" name="no_recurring" value="1" />
+        <input type="hidden" name="item_name" value="sampleyou.tube" />
         <input type="hidden" name="currency_code" value="USD" />
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
         <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-        </form>       
+        </form>
+           
         <span>Help keep Sample Youtube ad-free</span>
  
     </div>
@@ -154,10 +156,12 @@
             url: urlInput.value
           }
         }).then((response) => {
+          const vidThumbWrapperEl = document.querySelector('#vidThumbWrapper')
           const vidThumbEl = document.querySelector('#vidThumb')
           const vidTitleEl = document.querySelector('#vidTitle')
           const {title, thumbnail, id} = response.data
 
+          vidThumbWrapperEl.style.display = "block";
           vidThumbEl.setAttribute('src', thumbnail);
           vidTitleEl.innerHTML = title;
 
@@ -171,32 +175,5 @@
       false
     );
 
-    // downloadWavBtn.addEventListener(
-    //   "click",
-    //   function (e) {
-    //     axios({
-    //       url: "/info", //your url
-    //       method: "POST",
-    //       responseType: "json", // important
-    //       data: {
-    //         url: urlInput.value
-    //       }
-    //     }).then((response) => {
-    //       const vidThumbEl = document.querySelector('#vidThumb')
-    //       const vidTitleEl = document.querySelector('#vidTitle')
-    //       const {title, thumbnail, id} = response.data
-
-    //       vidThumbEl.setAttribute('src', thumbnail);
-    //       vidTitleEl.innerHTML = title;
-
-    //       const link = document.createElement("a");
-    //       link.href = `/downloadwav/${id}`;
-    //       link.setAttribute("download", title + '.aac'); //or any other extension
-    //       document.body.appendChild(link);
-    //       link.click();
-    //     })
-    //   },
-    //   false
-    // );
   </script>
 </html>

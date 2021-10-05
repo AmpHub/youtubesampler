@@ -3,11 +3,13 @@ const youtubedl = require('youtube-dl')
 const express = require('express')
 const ffmpeg = require('fluent-ffmpeg')
 const bodyParse = require('body-parser')
+const compression = require('compression')
 const app = express()
 const port = 80
 
 app.use(bodyParse.json())
 
+app.use(compression())
 
 
 app.get('/download/:id', (req, res) => {
