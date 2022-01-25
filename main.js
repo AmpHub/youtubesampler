@@ -5,7 +5,7 @@ const ffmpeg = require('fluent-ffmpeg')
 const bodyParse = require('body-parser')
 const compression = require('compression')
 const app = express()
-const port = 80
+const port = process.env.PORT
 
 app.use(bodyParse.json())
 
