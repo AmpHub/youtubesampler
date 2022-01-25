@@ -5,7 +5,7 @@ const ffmpeg = require('fluent-ffmpeg')
 const bodyParse = require('body-parser')
 const compression = require('compression')
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 8080
 
 app.use(bodyParse.json())
 
@@ -15,51 +15,54 @@ app.use(compression())
 app.get('/download/:id', (req, res) => {
 
   let videoid
-  
-  // const video = youtubedl(videoid)
-  const video = youtubedl(req.params.id)
-  
-  // Will be called when the download starts.
-  video.on('info', (info) => {
-    // console.log('Download started')
-    // console.log('filename: ' + info._filename)
-    // console.log('size: ' + info.size)
+  try {
+    // const video = youtubedl(videoid)
+    const video = youtubedl(req.params.id)
 
-    // console.log(info)
+    // Will be called when the download starts.
+    video.on('info', (info) => {
+      // console.log('Download started')
+      // console.log('filename: ' + info._filename)
+      // console.log('size: ' + info.size)
 
-    const title = info._filename.substring(0, 40).replace(/ /g, '')
+      // console.log(info)
 
-    res.attachment(`${title}.mp3`);
-  
-    ffmpeg(video)
-      .inputFormat('mp4')
-      .format('mp3')
-      .output(res)
-      .on('end', function() {
-        // console.log('Finished processing');
-        res.status(200).send()
-      })
-      .run();
-  })
-  
+      const title = info._filename.substring(0, 40).replace(/ /g, '')
+
+      res.attachment(`${title}.mp3`);
+
+      ffmpeg(video)
+        .inputFormat('mp4')
+        .format('mp3')
+        .output(res)
+        .on('end', function () {
+          // console.log('Finished processing');
+          res.status(200).send()
+        })
+        .run();
+    })
+
+  } catch (e) {
+    console.log(e)
+  }
 
 })
 
 // app.get('/downloadwav/:id', (req, res) => {
 
 //   let videoid
-  
+
 //   // const video = youtubedl(videoid)
 //   const video = youtubedl(req.params.id)
-  
+
 //   // Will be called when the download starts.
 //   video.on('info', (info) => {
 
 //     const title = info._filename.substring(0, 40).replace(/ /g, '')
 
 //     res.attachment(`${title}.aac`);
-    
-  
+
+
 //     ffmpeg(video)
 //       .inputFormat('mp4')
 //       .outputOptions(['-c:a aac', '-b:a 128k'])
@@ -74,27 +77,33 @@ app.get('/download/:id', (req, res) => {
 //       })
 //       .run();
 //   })
-  
+
 
 // })
 
 app.post('/info', (req, res) => {
-  youtubedl.getInfo(req.body.url, function(err, info) {
-    if (err) {
-      console.log(err)
-      res.status(500).json({error: 'Error retrieving info'})
-    }
+  try {
+
+    youtubedl.getInfo(req.body.url, function (err, info) {
+      if (err) {
+        console.log(err)
+        res.status(500).json({ error: 'Error retrieving info' })
+      }
 
 
-    // console.log(info)
+      // console.log(info)
 
-    const {title, thumbnail, id} = info;
-  
-    // console.log('title:', title)
-    // console.log('thumbnail:', thumbnail)
+      const { title, thumbnail, id } = info;
 
-    res.status(200).json({title, thumbnail, id})
-  })
+      // console.log('title:', title)
+      // console.log('thumbnail:', thumbnail)
+
+      res.status(200).json({ title, thumbnail, id })
+    })
+
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 app.use(express.static('static'))
