@@ -2,7 +2,6 @@ FROM node:16
 
 RUN apt-get -y update
 RUN apt-get install -y ffmpeg
-RUN alias python=python3
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -11,6 +10,8 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
+
+RUN python node_modules/youtube-dl/bin/youtube-dl help
 
 RUN npm install
 # If you are building your code for production
