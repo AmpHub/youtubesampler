@@ -2,7 +2,7 @@ FROM node:16
 
 RUN apt-get -y update
 RUN apt-get install -y ffmpeg
-RUN ln -s /usr/bin/python3 /usr/bin/env/python
+RUN apt-get install -y python3
 
 # Create app directory
 WORKDIR /usr/src/app
